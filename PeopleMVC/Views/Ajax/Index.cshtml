@@ -1,0 +1,77 @@
+﻿@model PeopleViewModel
+
+@{
+
+}
+
+<div class="text-center">
+<button class="btn-success" onclick="BtnClickedPeople()">Fetch People</button>
+<button class="btn-success" onclick="BtnClickedRefresh()">Refresh People</button>
+</div>
+
+<div class="search-form">
+<input type="text" id="id" name="id" value="Input id"/>
+<button onclick="BtnClicked()" type="submit">Details</button>
+<button onclick="BtnClickedDelete()" type="submit">Delete</button>
+</div>
+
+
+<div id="container"></div>
+
+<script>
+
+    function BtnClicked(){
+
+        var inputId = document.getElementById("id").value;
+
+        $.ajax({
+            url: "Ajax/ShowDetails?id=" + inputId,
+            type: "POST",
+            success: function (data) {
+                $("#container").html(data);
+                console.log(data)
+            }
+        })
+    }
+
+    function BtnClickedPeople() {
+
+        $.ajax({
+            url: "Ajax/FetchPeople",
+            type: "GET",
+            success: function (data) {
+                $("#container").html(data);
+                console.log(data)
+            }
+        })
+    }
+
+    function BtnClickedDelete() {
+
+        var inputId = document.getElementById("id").value;
+        console.log("Clicked")
+
+        $.ajax({
+            url: "Ajax/Delete?id=" + inputId,
+            type: "POST",
+            success: function (data) {
+                $("#container").html(data);
+                console.log(data)
+            }
+        })
+    }
+
+    function BtnClickedRefresh() {
+
+        $.ajax({
+            url: "Ajax/Refresh",
+            type: "GET",
+            success: function (data) {
+                $("#container").html(data);
+            }
+        })
+    }
+
+
+
+</script>

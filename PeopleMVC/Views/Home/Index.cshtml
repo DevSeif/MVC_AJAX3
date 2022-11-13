@@ -1,0 +1,30 @@
+﻿@model PeopleViewModel
+
+@{
+    ViewData["Title"] = "Home";
+}
+
+<form method="post" action="@Url.ActionLink("Index", "Home")">
+    <div class="search-form">
+        <input type="text" name="filterWord" placeholder="Search">
+        <input type="submit" value="Search">
+    </div>
+</form>
+
+
+<div class="text-center">
+    <form method="post" action="@Url.ActionLink("Create", "Home")">
+        <input type="text" name="Name" placeholder="Name">
+        <input type="text" name="PhoneNumber" placeholder="Phone">
+        <input type="text" name="City" placeholder="City">
+        <input type="submit" value="Add">
+    </form>
+</div>
+
+<a class="btn btn-success" asp-controller="Home" asp-action="Index">Refresh</a>
+
+
+@foreach(var person in Model.tempPeople){
+
+        <partial name="~/Views/Shared/_PersonPartial.cshtml" model="person"></partial>
+}
